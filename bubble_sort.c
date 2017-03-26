@@ -5,5 +5,5 @@
  */
 float* bubble_sort(float* unsorted)
 {
-
+  printf("In the bubble sort now\n");
 }
