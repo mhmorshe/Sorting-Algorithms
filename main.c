@@ -1,8 +1,30 @@
 #include <stdio.h>
-#include "bubble_sort.c"
+#include "sorting_algorithms.c"
+
+//This is the main function used to run the program
 void main()
 {
   float unsorted[9] = {1.1, 1.2, 4.5, 5.1, 3.2, 1.0, 0 , 54, 12.7};
-  bubble_sort(unsorted, 9);
- 
+
+  printf("The unsorted list is\n");
+  print_arr(unsorted, 9);
+
+  //running bubble sort
+  float* bubble_sorted;
+  bubble_sorted = bubble_sort(unsorted, 9);
+  //print bubble sorted list
+  printf("The sorted list from bubble sort is is\n");
+  print_arr(bubble_sorted, 9);
+
+
+
+  //running bubble sort
+  float* insertion_sorted;
+  insertion_sorted = insertion_sort(unsorted, 9);
+  //print bubble sorted list
+  printf("The sorted list from insertion sort is\n");
+  print_arr(insertion_sorted, 9);
+
+
+
 }
