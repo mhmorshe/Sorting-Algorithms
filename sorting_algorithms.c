@@ -101,3 +101,42 @@ float* merge(float* arr1, float* arr2, int arr1Len, int arr2Len)
 
   return toReturn;
 }
+
+
+
+//this function will be used to perform a merge sort
+float* merge_sort(float* arr, int length)
+{
+  //create an array of float pointers
+  //each float pointer will point to a sub array needed in merge sort
+  float* toMerge[length];
+
+  //create an array to hold the lengths of each of the sub arrays
+  int lengthOfSub[length];
+
+  //fill both the array, every element of the original array is a sub array at first, with length 1
+  for(int i = 0; i < length; i++)
+  {
+    toMerge[i] = &arr[i];
+    lengthOfSub[i] = 1;
+  }
+
+
+  //int to hold the number of sub arrays, starts at the length because every element is a sub array at first
+  int numberOfSub = length;
+
+  //while ther is more than one sub array
+  while(numberOfSub != 1)
+  {
+
+
+
+  }
+
+
+
+}
+
+
+
+

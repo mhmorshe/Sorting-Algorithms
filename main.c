@@ -29,10 +29,10 @@ void main()
 
   //test the merge step of merge sprt
   float unsorted1[5] = {1,3,5,7,9};
-  float unsorted2[5] = {2,4,6,8,10};
+  float unsorted2[4] = {2,4,8,10};
 
-  float* merge_sorted = merge(unsorted1,unsorted2, 5, 5);
-  print_arr(merge_sorted, 10);
+  float* merge_sorted = merge(unsorted1,unsorted2, 5, 4);
+  print_arr(merge_sorted, 9);
 
 
 
