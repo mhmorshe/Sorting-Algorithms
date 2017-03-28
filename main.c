@@ -28,10 +28,8 @@ void main()
 
 
   //test the merge step of merge sprt
-  float unsorted1[5] = {1,3,5,7,9};
-  float unsorted2[4] = {2,4,8,10};
-
-  float* merge_sorted = merge(unsorted1,unsorted2, 5, 4);
+  printf("The sorted list from merge sort is\n");
+  float* merge_sorted = merge_sort(unsorted,9);
   print_arr(merge_sorted, 9);
 
 

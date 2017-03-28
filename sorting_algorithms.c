@@ -107,36 +107,45 @@ float* merge(float* arr1, float* arr2, int arr1Len, int arr2Len)
 //this function will be used to perform a merge sort
 float* merge_sort(float* arr, int length)
 {
-  //create an array of float pointers
-  //each float pointer will point to a sub array needed in merge sort
-  float* toMerge[length];
 
-  //create an array to hold the lengths of each of the sub arrays
-  int lengthOfSub[length];
-
-  //fill both the array, every element of the original array is a sub array at first, with length 1
-  for(int i = 0; i < length; i++)
+  if (length < 2)//if the length of the array is 1 or 0, it is already sorted
   {
-    toMerge[i] = &arr[i];
-    lengthOfSub[i] = 1;
+    return arr;
   }
 
 
-  //int to hold the number of sub arrays, starts at the length because every element is a sub array at first
-  int numberOfSub = length;
+  //split the array into 2 sub arrays
+  float *sub1, *sub2;
+  int lenSub1, lenSub2;
 
-  //while ther is more than one sub array
-  while(numberOfSub != 1)
+ 
+  //allocate space for each sub array, should be half the size of
+  //current arr, or half + 1 for odd number size
+  lenSub1 = length / 2;
+  lenSub2 = length - lenSub1;
+  sub1 = (float*)malloc(sizeof(float) * lenSub1);
+  sub2 = (float*)malloc(sizeof(float) * lenSub2);
+  
+  //fill each of the sub arrays with data from the current array
+  for (int i =0; i < lenSub1 + lenSub2; i++) 
   {
-
-
+  	if(i < lenSub1)
+  	{
+      sub1[i] = arr[i];
+  	}
+  	else
+  	{
+      sub2[i-lenSub1] = arr[i];
+  	}
 
   }
 
 
+  //recursively call merge_sort and conquer
+  float* toReturn = merge(merge_sort(sub1, lenSub1), merge_sort(sub2, lenSub2), lenSub1 ,lenSub2);
+  free(sub1);
+  free(sub2);
+
+  return toReturn;
 
 }
-
-
-
-
