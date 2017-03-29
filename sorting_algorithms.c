@@ -149,3 +149,56 @@ float* merge_sort(float* arr, int length)
   return toReturn;
 
 }
+
+
+float* quick_sort(float* arr, int length)
+{
+
+	float* toReturn = (float*)malloc(length*sizeof(float));
+  memcpy(toReturn, arr, sizeof(float)*length);
+
+
+  //if the length is 1 or 0, the array is already sorted
+  if(length < 2)
+  {
+    return toReturn;
+  }
+
+  //the wall starts at index 0. everything less than index 0 is left of the wall
+  //everything greater than or equal to index 0 is right of the wall
+  int wallIndex = 0;
+
+  //make the last element of the array the pivot
+  float pivot = toReturn[length - 1];
+
+  for(int i = 0; i < length; i++)
+  {
+
+  	//if the current element is less than the picor
+    if(toReturn[i] < pivot)
+    {
+      //move the element to the other side of the wall
+      swap(toReturn, i, wallIndex);
+      wallIndex++;
+    }
+
+  }
+
+  //move the pivot to the wall index
+  swap(toReturn,wallIndex,length-1);
+
+  //recursively call the function on the sub arrays
+  float* lessThanSub    = quick_sort(toReturn, wallIndex);
+  float* greaterThanSub = quick_sort(toReturn+wallIndex, length-wallIndex);
+
+
+
+
+  memcpy(toReturn, lessThanSub,wallIndex*sizeof(float));
+  memcpy(toReturn + wallIndex, greaterThanSub, (length-wallIndex)*sizeof(float));
+
+  free(lessThanSub);
+  free(greaterThanSub);
+
+  return toReturn;
+}

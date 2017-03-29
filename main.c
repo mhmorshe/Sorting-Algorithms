@@ -28,11 +28,23 @@ void main()
 
 
   //test the merge step of merge sprt
+
+  printf("The original list is");
+  print_arr(unsorted,9);
+
   printf("The sorted list from merge sort is\n");
   float* merge_sorted = merge_sort(unsorted,9);
   print_arr(merge_sorted, 9);
 
+  printf("The original list is\n");
+  print_arr(unsorted,9);
 
+  printf("The sorted list from quick sort is\n");
+  float* quick_sorted = quick_sort(unsorted,9);
+  print_arr(quick_sorted, 9);
+
+  printf("The original list is\n");
+  print_arr(unsorted,9);
 
 
 }
