@@ -47,4 +47,12 @@ void main()
   print_arr(unsorted,9);
 
 
+  printf("The sorted list from selection sort is\n");
+  float* selection_sorted = selection_sort(unsorted,9);
+  print_arr(selection_sorted, 9);
+
+  printf("The original list is\n");
+  print_arr(unsorted,9);
+
+
 }

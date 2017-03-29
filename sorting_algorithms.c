@@ -190,15 +190,49 @@ float* quick_sort(float* arr, int length)
   //recursively call the function on the sub arrays
   float* lessThanSub    = quick_sort(toReturn, wallIndex);
   float* greaterThanSub = quick_sort(toReturn+wallIndex, length-wallIndex);
-
-
-
-
+  
+  //adjust the values in the toReturn array based on the return values from the recursive calls
   memcpy(toReturn, lessThanSub,wallIndex*sizeof(float));
   memcpy(toReturn + wallIndex, greaterThanSub, (length-wallIndex)*sizeof(float));
 
+  //free the excess mempry created on the stack due to the recursive calls
   free(lessThanSub);
   free(greaterThanSub);
 
   return toReturn;
+}
+
+
+float* selection_sort(float* unsorted, int length)
+{
+
+  float* sorted = (float*)malloc(length*sizeof(float));
+  memcpy(sorted, unsorted, sizeof(float)*length);
+
+
+	int numSorted = 0;//this int will hold the number of sorted elements
+	while(numSorted < length)
+	{
+		//assume the first element in the unsorted array is the min, until proven otherwise
+    int currMin = sorted[numSorted];
+    int currMinIndex = numSorted;
+
+    //loop through the unsorted array and find a min
+    for(int i = numSorted; i < length; i++)
+    {
+    	if(sorted[i] < currMin)//if a new min value is found, update currMin and curMinIndex
+    	{
+        currMin = sorted[i];
+        currMinIndex = i;
+    	}
+    }
+
+    //swap the min into its correct place
+    swap(sorted, currMinIndex, numSorted);
+    numSorted++;
+	}
+
+  //return the sorted array 
+  return sorted;
+
 }
