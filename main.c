@@ -2,57 +2,27 @@
 #include "sorting_algorithms.c"
 
 //This is the main function used to run the program
-void main()
+void main(int argc, char* argv[])
 {
-  float unsorted[9] = {1.1, 1.2, 4.5, 5.1, 3.2, 1.0, 0 , 54, 12.7};
+  //check the command line arguments
+  if(argc != 2)
+  {
+    printf("Error: incorect number of arguments passed to the program\n");
+    printf("Please Read README.txt and try again\n");
+    return;
+  }
 
-  printf("The unsorted list is\n");
-  print_arr(unsorted, 9);
+  FILE* inputFile = fopen(argv[1], "r");
 
-  //running bubble sort
-  float* bubble_sorted;
-  bubble_sorted = bubble_sort(unsorted, 9);
-  //print bubble sorted list
-  printf("The sorted list from bubble sort is is\n");
-  print_arr(bubble_sorted, 9);
+  if(inputFile == NULL)
+  {
+    printf("Error: An invalid file name was entered, please make sure the argument to the program is a file in the current directory\n");
+  }
 
+  while(fscanf(inputFile, ))
+  {
 
-
-  //running bubble sort
-  float* insertion_sorted;
-  insertion_sorted = insertion_sort(unsorted, 9);
-  //print bubble sorted list
-  printf("The sorted list from insertion sort is\n");
-  print_arr(insertion_sorted, 9);
-
-
-
-  //test the merge step of merge sprt
-
-  printf("The original list is");
-  print_arr(unsorted,9);
-
-  printf("The sorted list from merge sort is\n");
-  float* merge_sorted = merge_sort(unsorted,9);
-  print_arr(merge_sorted, 9);
-
-  printf("The original list is\n");
-  print_arr(unsorted,9);
-
-  printf("The sorted list from quick sort is\n");
-  float* quick_sorted = quick_sort(unsorted,9);
-  print_arr(quick_sorted, 9);
-
-  printf("The original list is\n");
-  print_arr(unsorted,9);
-
-
-  printf("The sorted list from selection sort is\n");
-  float* selection_sorted = selection_sort(unsorted,9);
-  print_arr(selection_sorted, 9);
-
-  printf("The original list is\n");
-  print_arr(unsorted,9);
+  }
 
 
 }
