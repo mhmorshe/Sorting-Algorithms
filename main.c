@@ -4,7 +4,7 @@
 
 
 //this method will be used to handle the user's input
-void handle_option(int option, float* unsorted, float* sorted, int numberOfFloats)
+void handle_option(int option, float* unsorted, float** sorted, int numberOfFloats)
 {
 
 
@@ -18,7 +18,7 @@ void handle_option(int option, float* unsorted, float* sorted, int numberOfFloat
     printf("Running selection sort\n");
     free(sorted);
     time_t before = time(NULL);
-    sorted = selection_sort(unsorted,numberOfFloats);
+    *sorted = selection_sort(unsorted,numberOfFloats);
     time_t after = time(NULL);
     double diff_sec = difftime(after,before);
     printf("Sorting was done in %d seconds\n", diff_sec);
@@ -28,7 +28,7 @@ void handle_option(int option, float* unsorted, float* sorted, int numberOfFloat
     printf("Running bubble sort\n");
     free(sorted);
     time_t before = time(NULL);
-    sorted = bubble_sort(unsorted,numberOfFloats);
+    *sorted = bubble_sort(unsorted,numberOfFloats);
     time_t after = time(NULL);
     double diff_sec = difftime(after,before);
     printf("Sorting was done in %d seconds\n", diff_sec);
@@ -38,7 +38,7 @@ void handle_option(int option, float* unsorted, float* sorted, int numberOfFloat
     printf("Running insertion sort\n");
     free(sorted);
     time_t before = time(NULL);
-    sorted = insertion_sort(unsorted,numberOfFloats);
+    *sorted = insertion_sort(unsorted,numberOfFloats);
     time_t after = time(NULL);
     double diff_sec = difftime(after,before);
     printf("Sorting was done in %d seconds\n", diff_sec);
@@ -48,7 +48,7 @@ void handle_option(int option, float* unsorted, float* sorted, int numberOfFloat
     printf("Running merge sort\n");
     free(sorted);
     time_t before = time(NULL);
-    sorted = merge_sort(unsorted,numberOfFloats);
+    *sorted = merge_sort(unsorted,numberOfFloats);
     time_t after = time(NULL);
     double diff_sec = difftime(after,before);
     printf("Sorting was done in %d seconds\n", diff_sec);
@@ -58,21 +58,21 @@ void handle_option(int option, float* unsorted, float* sorted, int numberOfFloat
     printf("Running quick sort\n");
     free(sorted);
     time_t before = time(NULL);
-    sorted = quick_sort(unsorted,numberOfFloats);
+    *sorted = quick_sort(unsorted,numberOfFloats);
     time_t after = time(NULL);
     double diff_sec = difftime(after,before);
     printf("Sorting was done in %d seconds\n", diff_sec);
   }
   else if(option == 7)
   {
-    if(sorted == NULL)
+    if(*sorted == NULL)
     {
       printf("A sorting algorithm has not been run yet, can not print the sorted list");
     }
     else
     {
       printf("The sorted list is:\n");
-      print_arr(sorted, numberOfFloats);
+      print_arr(*sorted, numberOfFloats);
     }
 
   }
@@ -85,9 +85,9 @@ void handle_option(int option, float* unsorted, float* sorted, int numberOfFloat
 }
 
 //this function will be used to print the menue for the user 
-void print_Menue()
+void print_Menu()
 {
-  printf("Menue:\n");
+  printf("\nMenu:\n");
   printf("1: Enter 1 to print the unsorted input Data\n");
   printf("2: Enter 2 to run selection sort\n"); 
   printf("3: Enter 3 to run bubble sort\n");
@@ -144,15 +144,15 @@ void main(int argc, char* argv[])
 
   float* sorted = NULL;//float pointer, should point to the sorted data
   int option;//int to hold the user option
-  print_Menue();//print the menue 
+  print_Menu();//print the menue 
   scanf("%i", &option);//read the user input
   while(option != 8)
   {
-    handle_option(option, inputArr, sorted, numberOfFloats);
+    handle_option(option, inputArr, &sorted, numberOfFloats);
 
     if(option != 8)
     {
-      print_Menue();
+      print_Menu();
       scanf("%i", &option);
     }
 

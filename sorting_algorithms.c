@@ -174,7 +174,7 @@ float* quick_sort(float* arr, int length)
   for(int i = 0; i < length; i++)
   {
 
-  	//if the current element is less than the picor
+  	//if the current element is less than the pivor
     if(toReturn[i] < pivot)
     {
       //move the element to the other side of the wall
@@ -189,7 +189,7 @@ float* quick_sort(float* arr, int length)
 
   //recursively call the function on the sub arrays
   float* lessThanSub    = quick_sort(toReturn, wallIndex);
-  float* greaterThanSub = quick_sort(toReturn+wallIndex, length-wallIndex);
+  float* greaterThanSub = quick_sort(toReturn + wallIndex, length-wallIndex);
   
   //adjust the values in the toReturn array based on the return values from the recursive calls
   memcpy(toReturn, lessThanSub,wallIndex*sizeof(float));
