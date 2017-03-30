@@ -80,6 +80,10 @@ void handle_option(int option, float* unsorted, float** sorted, int numberOfFloa
   {
     return;
   }
+  else
+  {
+    printf("Invalid user input, please make sure you enter a number between 1 and 8\n");
+  }
 
 
 }

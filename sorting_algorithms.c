@@ -151,56 +151,49 @@ float* merge_sort(float* arr, int length)
 }
 
 
-float* quick_sort(float* arr, int length)
+//This method will be used to fid the partition in quicksort
+int partition(float* unsorted, int l, int r) 
 {
-
-	float* toReturn = (float*)malloc(length*sizeof(float));
-  memcpy(toReturn, arr, sizeof(float)*length);
-
-
-  //if the length is 1 or 0, the array is already sorted
-  if(length < 2)
+  int pivot, i, j, t;
+  pivot =unsorted[l];
+  i = l; j = r+1;
+		
+  while(1)
   {
-    return toReturn;
+    do ++i; while( unsorted[i] <= pivot && i <= r );
+   	do --j; while( unsorted[j] > pivot );
+   	if( i >= j ) break;
+    swap(unsorted, i, j);
   }
-
-  //the wall starts at index 0. everything less than index 0 is left of the wall
-  //everything greater than or equal to index 0 is right of the wall
-  int wallIndex = 0;
-
-  //make the last element of the array the pivot
-  float pivot = toReturn[length - 1];
-
-  for(int i = 0; i < length; i++)
-  {
-
-  	//if the current element is less than the pivor
-    if(toReturn[i] < pivot)
-    {
-      //move the element to the other side of the wall
-      swap(toReturn, i, wallIndex);
-      wallIndex++;
-    }
-
-  }
-
-  //move the pivot to the wall index
-  swap(toReturn,wallIndex,length-1);
-
-  //recursively call the function on the sub arrays
-  float* lessThanSub    = quick_sort(toReturn, wallIndex);
-  float* greaterThanSub = quick_sort(toReturn + wallIndex, length-wallIndex);
-  
-  //adjust the values in the toReturn array based on the return values from the recursive calls
-  memcpy(toReturn, lessThanSub,wallIndex*sizeof(float));
-  memcpy(toReturn + wallIndex, greaterThanSub, (length-wallIndex)*sizeof(float));
-
-  //free the excess mempry created on the stack due to the recursive calls
-  free(lessThanSub);
-  free(greaterThanSub);
-
-  return toReturn;
+    swap(unsorted, l, j);
+    return j;
 }
+
+//This method will be used to recursively call itself to do the quick sort
+void quickSort(float* unsorted, int l, int r)
+{
+  int j;
+
+  if( l < r ) 
+  {
+     j = partition( unsorted, l, r);
+     quickSort( unsorted, l, j-1);
+     quickSort( unsorted, j+1, r);
+  }	
+}
+
+
+//this method calls quicksort to return a sorted array
+float* quick_sort(float* unsorted, int length)
+{
+	float* toReturn = (float*)malloc(length*sizeof(float));
+	memcpy(toReturn, unsorted, sizeof(float)*length);
+	quickSort(toReturn, 0, length-1);
+	return toReturn;
+}
+
+
+
 
 
 float* selection_sort(float* unsorted, int length)
